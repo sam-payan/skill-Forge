@@ -308,10 +308,6 @@ useEffect(() => {
 
 ## 8. Environment Setup Required
 
-### Backend .env additions:
-```
-EMERGENT_LLM_KEY=sk-emergent-6090fA63fC1F4BaAcE
-```
 
 ### Installation:
 ```bash

@@ -1,4 +1,3 @@
-from emergentintegrations.llm.chat import LlmChat, UserMessage
 from dotenv import load_dotenv
 import os
 import json
@@ -7,16 +6,12 @@ import logging
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-EMERGENT_LLM_KEY = os.getenv("EMERGENT_LLM_KEY")
 
 class AzureAIService:
     """Service for Azure OpenAI integration using emergentintegrations"""
     
     def __init__(self):
-        self.api_key = EMERGENT_LLM_KEY
-        if not self.api_key:
-            raise ValueError("EMERGENT_LLM_KEY not found in environment variables")
-    
+        
     async def generate_assessment_scenario(self, assessment_title: str, difficulty: str, skills: list) -> str:
         """
         Generate a personalized assessment scenario using Azure OpenAI

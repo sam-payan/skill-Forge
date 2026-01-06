@@ -2,9 +2,11 @@ import React from 'react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
+import {Link} from "react-router-dom";
 import { Progress } from '../components/ui/progress';
 import { Brain, Target, TrendingUp, Shield, Zap, CheckCircle2, Clock, BarChart3, Award, Code2, Database, Layers, ArrowRight, ChevronRight } from 'lucide-react';
 import { assessments, dashboardData, techFeatures, comparisons } from '../mock';
+import Login from "./Login.jsx";
 
 const Home = () => {
   return (
@@ -394,9 +396,11 @@ const Home = () => {
               Start Assessing Your Skills
               <ArrowRight className="button-icon" />
             </Button>
+            <Link to ="login">
             <Button size="lg" variant="outline" className="cta-secondary">
-              Create Free Account
+               Create Free Account
             </Button>
+            </Link>
           </div>
         </div>
       </section>
