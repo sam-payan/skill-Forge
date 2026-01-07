@@ -36,7 +36,7 @@ function Register() {
     try {
       setError("");
       setLoading(true);
-      await loginWithGoogle();
+      await loginWithGoogle(email,password);
       navigate("/dashboard");
     } catch (err) {
       setError("Google sign up failed: " + err.message);
@@ -45,18 +45,7 @@ function Register() {
     }
   }
 
-  async function handleGithubSignup() {
-    try {
-      setError("");
-      setLoading(true);
-      await loginWithGithub();
-      navigate("/dashboard");
-    } catch (err) {
-      setError("GitHub sign up failed: " + err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">

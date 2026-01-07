@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Mail, Lock, AlertCircle } from "lucide-react";
+import { signInWithEmailAndPassword , GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { auth } from "../firebaseconfig";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -7,23 +10,36 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+ 
+async function login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
+}
+async function handleGoogleLogin() {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
+}
 
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      const mockToken = "mock_jwt_token_" + Date.now();
-     
-      alert("Login successful! Token: " + mockToken);
-      // window.location.href = "/dashboard";
-    } catch {
-      setError("Invalid email or password");
-    } finally {
-      setLoading(false);
-    }
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  setLoading(true);
+  setError("");
+
+  try {
+    const userCredential = await login(email, password);
+
+    const token = await userCredential.user.getIdToken();
+
+    console.log("Firebase Token:", token);
+
+    navigate("/dashboard");
+  } catch (err) {
+    setError(err.message || "Invalid email or password");
+  } finally {
+    setLoading(false);
   }
+}
+
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 sm:px-6 lg:px-8">
@@ -134,6 +150,7 @@ function Login() {
           {/* Social login buttons */}
           <div className="grid grid-cols-1 ">
             <button
+            onClick={handleGoogleLogin}
               type="button"
               className="h-11 rounded-lg border border-slate-700 bg-slate-950 text-slate-300 text-sm font-medium hover:bg-slate-800 hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 transition duration-200 flex items-center justify-center gap-2"
             >
