@@ -1041,8 +1041,8 @@ body {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  
+
   .cta-title {
     font-size: 36px;
   }
-}
+} 

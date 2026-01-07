@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 import { Progress } from '../components/ui/progress';
 import { Brain, Target, TrendingUp, Shield, Zap, CheckCircle2, Clock, BarChart3, Award, Code2, Database, Layers, ArrowRight, ChevronRight } from 'lucide-react';
 import { assessments, dashboardData, techFeatures, comparisons } from '../mock';
-import Login from "./Login.jsx";
 
 const Home = () => {
   return (
@@ -16,7 +15,7 @@ const Home = () => {
         <div className="header-content">
           <div className="logo">
             <Brain className="logo-icon" />
-            <span className="logo-text">SkillSphere</span>
+            <span className="logo-text">SkillForge</span>
           </div>
           <nav className="main-nav">
             <a href="#how-it-works" className="nav-link">How It Works</a>
@@ -24,7 +23,10 @@ const Home = () => {
             <a href="#dashboard" className="nav-link">Dashboard</a>
             <a href="#technology" className="nav-link">Technology</a>
           </nav>
-          <Button className="cta-button">Start Assessment</Button>
+          <Link to="login">
+            <Button className="cta-button">Get started!</Button>
+          </Link>
+          
         </div>
       </header>
 
@@ -115,7 +117,7 @@ const Home = () => {
       {/* How It Works */}
       <section id="how-it-works" className="how-it-works-section">
         <div className="section-header">
-          <h2 className="section-title">How SkillSphere Works</h2>
+          <h2 className="section-title">How SkillForge Works</h2>
           <p className="section-subtitle">Five steps to validated, job-ready skills</p>
         </div>
         <div className="steps-container">
@@ -351,10 +353,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why SkillSphere */}
+      {/* Why SkillForge */}
       <section className="comparison-section">
         <div className="section-header">
-          <h2 className="section-title">Why Choose SkillSphere</h2>
+          <h2 className="section-title">Why Choose SkillForge</h2>
           <p className="section-subtitle">Execution-based validation vs. passive learning</p>
         </div>
         <div className="comparison-grid">
@@ -366,9 +368,9 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <div className="comparison-content">
-                  <div className="comparison-column skillsphere">
-                    <h4>SkillSphere</h4>
-                    <p>{item.skillsphere}</p>
+                  <div className="comparison-column SkillForge">
+                    <h4>SkillForge</h4>
+                    <p>{item.SkillForge}</p>
                   </div>
                   <div className="comparison-divider"></div>
                   <div className="comparison-column traditional">
@@ -392,15 +394,12 @@ const Home = () => {
             Build measurable skills that employers recognize.
           </p>
           <div className="cta-buttons">
+            <Link to="login">
             <Button size="lg" className="cta-primary">
               Start Assessing Your Skills
               <ArrowRight className="button-icon" />
             </Button>
-            <Link to ="login">
-            <Button size="lg" variant="outline" className="cta-secondary">
-               Create Free Account
-            </Button>
-            </Link>
+           </Link>
           </div>
         </div>
       </section>
@@ -411,7 +410,7 @@ const Home = () => {
           <div className="footer-section">
             <div className="footer-logo">
               <Brain className="footer-logo-icon" />
-              <span>SkillSphere</span>
+              <span>SkillForge</span>
             </div>
             <p className="footer-tagline">Build skills. Prove expertise. Get job-ready.</p>
           </div>
@@ -444,7 +443,7 @@ const Home = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 SkillSphere. Powered by Microsoft Azure AI.</p>
+          <p>&copy; 2025 SkillForge. Powered by Microsoft Azure AI.</p>
         </div>
       </footer>
     </div>
