@@ -208,10 +208,11 @@ const Home = () => {
                   <Brain className="ai-icon" />
                   <span>AI Evaluation: {assessment.aiMethod}</span>
                 </div>
-                <Button className="assessment-cta" variant="outline">
+                <Link to="login">                <Button className="assessment-cta" variant="outline">
                   Start Assessment
                   <ChevronRight className="button-icon" />
                 </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}
