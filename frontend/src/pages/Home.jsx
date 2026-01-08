@@ -27,7 +27,7 @@ const Home = () => {
             <Button className="cta-button">Get started!</Button>
           </Link>
           
-        </div>
+        </div>  
       </header>
 
       {/* Hero Section */}

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Bell, Search, User } from "lucide-react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import TodayTask from "@/components/dashboard/TodayTask";
@@ -5,6 +6,8 @@ import SkillRadar from "@/components/dashboard/SkillRadar";
 import RoadmapProgress from "@/components/dashboard/RoadmapProgress";
 import WeeklyStats, { defaultStats } from "@/components/dashboard/WeeklyStats";
 import UpcomingTasks, { defaultUpcomingTasks } from "@/components/dashboard/UpcomingTasks";
+
+import { getAuth } from "firebase/auth"; // Firebase Auth
 
 const todayTask = {
   title: "React State Management Deep Dive",
@@ -33,6 +36,17 @@ const phases = [
 ];
 
 export default function Dashboard() {
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      setUserEmail(user.email || "Learner"); // fallback if email not present
+    }
+  }, []);
+
   return (
     <DashboardLayout>
       {/* HEADER */}
@@ -40,7 +54,7 @@ export default function Dashboard() {
         <div className="flex flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h1 className="text-xl sm:text-2xl font-semibold text-white">
-              Welcome back, Alex
+              Welcome back, {userEmail}
             </h1>
             <p className="text-sm text-zinc-400 max-w-md">
               Continue your journey to becoming a Full-Stack Developer
