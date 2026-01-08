@@ -32,7 +32,7 @@ async function handleSubmit(e) {
 
     console.log("Firebase Token:", token);
 
-    navigate("/dashboard");
+    navigate("/Onboarding");
   } catch (err) {
     setError(err.message || "Invalid email or password");
   } finally {

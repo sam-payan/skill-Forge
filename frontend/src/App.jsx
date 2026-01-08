@@ -27,7 +27,7 @@ function PublicRoute({ children }) {
   const { currentUser } = useAuth();
 
   if (currentUser) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/Onboarding" replace />;
   }
 
   return children;

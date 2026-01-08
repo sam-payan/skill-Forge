@@ -4,10 +4,7 @@ import TodayTask from "@/components/dashboard/TodayTask";
 import SkillRadar from "@/components/dashboard/SkillRadar";
 import RoadmapProgress from "@/components/dashboard/RoadmapProgress";
 import WeeklyStats, { defaultStats } from "@/components/dashboard/WeeklyStats";
-import UpcomingTasks, {
-  defaultUpcomingTasks,
-} from "@/components/dashboard/UpcomingTasks";
-import { Button } from "@/components/ui/button";
+import UpcomingTasks, { defaultUpcomingTasks } from "@/components/dashboard/UpcomingTasks";
 
 const todayTask = {
   title: "React State Management Deep Dive",
@@ -35,74 +32,68 @@ const phases = [
   { id: 4, name: "Portfolio & Interview Prep", status: "locked" as const, tasks: 6, completedTasks: 0 },
 ];
 
-const Dashboard = () => {
+export default function Dashboard() {
   return (
     <DashboardLayout>
-      {/* Header */}
-      <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-lg border-b border-border">
+      {/* HEADER */}
+      <header className="sticky top-0 z-30 bg-zinc-950/80 backdrop-blur border-b border-zinc-800">
         <div className="flex flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-foreground">
+            <h1 className="text-xl sm:text-2xl font-semibold text-white">
               Welcome back, Alex
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-zinc-400 max-w-md">
               Continue your journey to becoming a Full-Stack Developer
             </p>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="relative flex-1 sm:flex-none">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <div className="flex items-center gap-3">
+            {/* SEARCH */}
+            <div className="relative w-full sm:w-56">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
               <input
                 type="text"
                 placeholder="Search..."
-                className="
-                  w-full
-                  sm:w-56
-                  pl-9 pr-4 py-2
-                  rounded-lg
-                  border border-input
-                  bg-background
-                  text-sm
-                  focus:outline-none focus:ring-2 focus:ring-ring
-                "
+                className="w-full rounded-md bg-zinc-900 border border-zinc-800 pl-9 pr-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
 
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-destructive rounded-full" />
-            </Button>
+            {/* NOTIFICATION */}
+            <button className="relative p-2 rounded-md hover:bg-zinc-800 transition">
+              <Bell className="w-5 h-5 text-zinc-300" />
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500" />
+            </button>
 
-            <Button variant="ghost" size="icon">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <User className="w-4 h-4 text-primary-foreground" />
-              </div>
-            </Button>
+            {/* PROFILE */}
+            <button className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+              <User className="w-4 h-4 text-white" />
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <div className="px-4 py-6 sm:px-6 lg:px-8">
+      {/* MAIN */}
+      <main className="px-4 py-6 sm:px-6 lg:px-8">
+        {/* STATS */}
         <div className="mb-6">
           <WeeklyStats stats={defaultStats} />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-6">
+        {/* GRID */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          {/* LEFT */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
             <TodayTask task={todayTask} />
             <RoadmapProgress phases={phases} />
           </div>
 
-          <div className="space-y-6">
+          {/* RIGHT */}
+          <div className="flex flex-col gap-6">
             <SkillRadar skills={skills} />
             <UpcomingTasks tasks={defaultUpcomingTasks} />
           </div>
         </div>
-      </div>
+      </main>
     </DashboardLayout>
   );
-};
-
-export default Dashboard;
+}
