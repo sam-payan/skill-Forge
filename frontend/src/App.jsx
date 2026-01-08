@@ -1,9 +1,10 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Home from './pages/Home';
-import Login from './pages/Login'
+import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/dashboard';
+import Dashboard from './pages/Dashboard';
 import Onboarding from "./pages/Onboarding";
 import Roadmap from "./pages/Roadmap";
 import Assessments from "./pages/Assessments";
@@ -12,26 +13,118 @@ import Profile from "./pages/Profile";
 import TaskExecution from "./pages/TaskExecution";
 import NotFound from "./pages/NotFound";
 
+function ProtectedRoute({ children }) {
+  const { currentUser } = useAuth();
+
+  if (!currentUser) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
+function PublicRoute({ children }) {
+  const { currentUser } = useAuth();
+
+  if (currentUser) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return children;
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route 
+        path="/login" 
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } 
+      />
+      <Route 
+        path="/register" 
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        } 
+      />
+
+      <Route 
+        path="/onboarding" 
+        element={
+          <ProtectedRoute>
+            <Onboarding />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/dashboard" 
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/roadmap" 
+        element={
+          <ProtectedRoute>
+            <Roadmap />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/assessments" 
+        element={
+          <ProtectedRoute>
+            <Assessments />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/task/:taskId" 
+        element={
+          <ProtectedRoute>
+            <TaskExecution />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/mentor" 
+        element={
+          <ProtectedRoute>
+            <Mentor />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } 
+      />
+
+      {/* 404 Route */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+}
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-           <Route path="/register" element={<Register />} />
-           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/roadmap" element={<Roadmap />} />
-          <Route path="/assessments" element={<Assessments />} />
-          <Route path="/task/:taskId" element={<TaskExecution />} />
-          <Route path="/mentor" element={<Mentor />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

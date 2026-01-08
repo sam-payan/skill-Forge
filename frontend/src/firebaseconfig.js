@@ -4,12 +4,14 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDBiIZUFLl563aEw963LqYJNaigFT_TxMM",
-  authDomain: "studio-1013059618-183af.firebaseapp.com",
-  projectId: "studio-1013059618-183af",
-  storageBucket: "studio-1013059618-183af.firebasestorage.app",
-  messagingSenderId: "525176142626",
-  appId: "1:525176142626:web:dc70995754d64d347e037b"
+  apiKey: "AIzaSyBzx90RwgL7H1lDIF04yFebpwFJnzk739c",
+  authDomain: "skillforge-3e9d4.firebaseapp.com",
+  databaseURL: "https://skillforge-3e9d4-default-rtdb.firebaseio.com",
+  projectId: "skillforge-3e9d4",
+  storageBucket: "skillforge-3e9d4.firebasestorage.app",
+  messagingSenderId: "1036150438966",
+  appId: "1:1036150438966:web:9205529f7a735580cd2c97",
+  measurementId: "G-N123Z5MD82"
 };
 
 const app = initializeApp(firebaseConfig);
