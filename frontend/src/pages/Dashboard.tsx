@@ -6,8 +6,7 @@ import SkillRadar from "@/components/dashboard/SkillRadar";
 import RoadmapProgress from "@/components/dashboard/RoadmapProgress";
 import WeeklyStats, { defaultStats } from "@/components/dashboard/WeeklyStats";
 import UpcomingTasks, { defaultUpcomingTasks } from "@/components/dashboard/UpcomingTasks";
-
-import { getAuth } from "firebase/auth"; // Firebase Auth
+import { getAuth } from "firebase/auth";
 
 const todayTask = {
   title: "React State Management Deep Dive",
@@ -36,52 +35,53 @@ const phases = [
 ];
 
 export default function Dashboard() {
-  const [userEmail, setUserEmail] = useState<string>("");
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     const auth = getAuth();
     const user = auth.currentUser;
-
-    if (user) {
-      setUserEmail(user.email || "Learner"); // fallback if email not present
-    }
+    if (user) setUserEmail(user.email || "Learner");
   }, []);
 
   return (
     <DashboardLayout>
       {/* HEADER */}
       <header className="sticky top-0 z-30 bg-zinc-950/80 backdrop-blur border-b border-zinc-800">
-        <div className="flex flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-semibold text-white">
-              Welcome back, {userEmail}
-            </h1>
-            <p className="text-sm text-zinc-400 max-w-md">
-              Continue your journey to becoming a Full-Stack Developer
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {/* SEARCH */}
-            <div className="relative w-full sm:w-56">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full rounded-md bg-zinc-900 border border-zinc-800 pl-9 pr-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              />
+        <div className="px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            {/* TITLE */}
+            <div>
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white">
+                Welcome back, {userEmail}
+              </h1>
+              <p className="text-xs sm:text-sm text-zinc-400 max-w-md">
+                Continue your journey to becoming a Full-Stack Developer
+              </p>
             </div>
 
-            {/* NOTIFICATION */}
-            <button className="relative p-2 rounded-md hover:bg-zinc-800 transition">
-              <Bell className="w-5 h-5 text-zinc-300" />
-              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500" />
-            </button>
+            {/* ACTIONS */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* SEARCH – hidden on very small screens */}
+              <div className="relative hidden sm:block w-48 lg:w-56">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full rounded-md bg-zinc-900 border border-zinc-800 pl-9 pr-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+              </div>
 
-            {/* PROFILE */}
-            <button className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
-              <User className="w-4 h-4 text-white" />
-            </button>
+              {/* NOTIFICATIONS */}
+              <button className="relative p-2 rounded-md hover:bg-zinc-800 transition">
+                <Bell className="w-5 h-5 text-zinc-300" />
+                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500" />
+              </button>
+
+              {/* PROFILE */}
+              <button className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
+                <User className="w-4 h-4 text-white" />
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -93,7 +93,7 @@ export default function Dashboard() {
           <WeeklyStats stats={defaultStats} />
         </div>
 
-        {/* GRID */}
+        {/* CONTENT GRID */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {/* LEFT */}
           <div className="lg:col-span-2 flex flex-col gap-6">

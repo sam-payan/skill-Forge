@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Lock, AlertCircle } from "lucide-react";
 import { signInWithEmailAndPassword , GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { auth } from "../firebaseconfig";
+import '../index.css'
 
 
 function Login() {
@@ -61,7 +62,7 @@ async function handleSubmit(e) {
               Welcome Back
             </h1>
             <p className="text-slate-400 text-sm">
-              Sign in to continue to SkillSphere
+              Sign in to continue to SkillForge
             </p>
           </div>
 
