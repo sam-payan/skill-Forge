@@ -38,7 +38,12 @@
 .logo-icon {
   width: 28px;
   height: 28px;
-  color: var(--color-azure-blue);
+  color: white;
+}
+.logo-text {
+  width: 28px;
+  height: 28px;
+  color: white;
 }
 
 .main-nav {
@@ -47,7 +52,7 @@
 }
 
 .nav-link {
-  color: var(--color-text-secondary);
+  color: white;
   text-decoration: none;
   font-size: 14px;
   font-weight: 400;
